@@ -67,12 +67,6 @@
                     <span class="hidden sm:inline">1-Hr Study Timer</span>
                     <span id="header-timer-badge" class="bg-blue-800 text-xs px-1.5 py-0.5 rounded font-mono">60:00</span>
                 </button>
-
-                <!-- Share / GitHub Modal Button -->
-                <button onclick="toggleShareModal(true)" class="flex items-center space-x-2 bg-slate-800 hover:bg-slate-700 text-slate-200 border border-borderCol px-3.5 py-2 rounded-lg font-medium text-sm transition">
-                    <i class="fa-brands fa-github"></i>
-                    <span class="hidden sm:inline">Deploy & Share</span>
-                </button>
             </div>
         </div>
     </header>
@@ -217,8 +211,7 @@
 
     <!-- Footer -->
     <footer class="mt-20 border-t border-borderCol bg-cardBg/40 py-8 text-center text-xs text-slate-500">
-        <p>System Design & LLD Roadmap • Built for developers sharing knowledge with friends.</p>
-        <p class="mt-1">Deployable on GitHub Pages in 1 click.</p>
+        <p>System Design & LLD Roadmap • Built for manual daily study tracking.</p>
     </footer>
 
     <!-- 1-HOUR STUDY TIMER MODAL -->
@@ -278,48 +271,6 @@
                     <span class="block text-xs font-bold text-emerald-400">20m</span>
                     <span class="text-[10px] text-slate-400">Revision</span>
                 </button>
-            </div>
-        </div>
-    </div>
-
-    <!-- GITHUB DEPLOY & SHARE MODAL -->
-    <div id="share-modal" class="fixed inset-0 z-50 bg-black/70 backdrop-blur-sm hidden flex items-center justify-center p-4">
-        <div class="bg-cardBg border border-borderCol rounded-2xl max-w-lg w-full p-6 sm:p-8 shadow-2xl relative max-h-[90vh] overflow-y-auto">
-            <div class="flex items-center justify-between mb-6">
-                <div class="flex items-center space-x-2">
-                    <i class="fa-brands fa-github text-white text-xl"></i>
-                    <h3 class="text-lg font-bold text-white">Deploy & Share with Friends</h3>
-                </div>
-                <button onclick="toggleShareModal(false)" class="text-slate-400 hover:text-white p-1">
-                    <i class="fa-solid fa-xmark text-lg"></i>
-                </button>
-            </div>
-
-            <div class="space-y-4 text-sm text-slate-300">
-                <p>Want to share this exact interactive roadmap website with your friends? You can host it for free on <strong class="text-white">GitHub Pages</strong> in under 2 minutes!</p>
-                
-                <div class="bg-darkBg border border-borderCol p-4 rounded-xl space-y-3 font-mono text-xs">
-                    <div class="text-slate-400 font-sans font-bold text-xs uppercase tracking-wider mb-1">Step-by-Step GitHub Guide:</div>
-                    <p><span class="text-blue-400">1.</span> Create a new public repository on GitHub (e.g., <code class="text-emerald-400">system-design-roadmap</code>).</p>
-                    <p><span class="text-blue-400">2.</span> Save the code of this page into a file named <code class="text-emerald-400">index.html</code>.</p>
-                    <p><span class="text-blue-400">3.</span> Push <code class="text-emerald-400">index.html</code> to the <code class="text-emerald-400">main</code> branch of your repository.</p>
-                    <p><span class="text-blue-400">4.</span> Go to repository <strong>Settings</strong> &gt; <strong>Pages</strong>.</p>
-                    <p><span class="text-blue-400">5.</span> Under Build and deployment, set Branch to <code class="text-emerald-400">main</code> and folder to <code class="text-emerald-400">/ (root)</code>, then click Save!</p>
-                </div>
-
-                <div class="bg-blue-500/10 border border-blue-500/20 p-4 rounded-xl flex items-center justify-between">
-                    <div>
-                        <h4 class="font-semibold text-blue-400 text-xs mb-1">Export / Import Progress Backup</h4>
-                        <p class="text-xs text-slate-400">Export your completed checklist progress as JSON to share with study buddies.</p>
-                    </div>
-                    <div class="flex space-x-2">
-                        <button onclick="exportProgress()" class="bg-blue-600 hover:bg-blue-500 text-white px-3 py-1.5 rounded-lg font-medium text-xs transition">Export</button>
-                    </div>
-                </div>
-            </div>
-
-            <div class="mt-6 pt-4 border-t border-borderCol flex justify-end">
-                <button onclick="toggleShareModal(false)" class="bg-slate-800 hover:bg-slate-700 text-white px-4 py-2 rounded-xl text-sm font-semibold transition">Got it!</button>
             </div>
         </div>
     </div>
@@ -815,23 +766,6 @@
 
             const pct = (timerSecondsRemaining / timerTotalSeconds) * 100;
             document.getElementById('timer-progress-bar').style.width = `${pct}%`;
-        }
-
-        // Share & Export Functions
-        function toggleShareModal(show) {
-            const modal = document.getElementById('share-modal');
-            if (show) modal.classList.remove('hidden');
-            else modal.classList.add('hidden');
-        }
-
-        function exportProgress() {
-            const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify({ userProgress, practiceStatus }));
-            const downloadAnchor = document.createElement('a');
-            downloadAnchor.setAttribute("href", dataStr);
-            downloadAnchor.setAttribute("download", "system_design_roadmap_progress.json");
-            document.body.appendChild(downloadAnchor);
-            downloadAnchor.click();
-            downloadAnchor.remove();
         }
     </script>
 </body>
