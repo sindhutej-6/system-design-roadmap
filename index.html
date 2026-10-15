@@ -1,0 +1,838 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>System Design & LLD 1-Hour Daily Study Roadmap</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        darkBg: '#0b0f19',
+                        cardBg: '#131c2e',
+                        borderCol: '#1e293b',
+                        accentBlue: '#3b82f6',
+                        accentPurple: '#8b5cf6',
+                        accentEmerald: '#10b981'
+                    }
+                }
+            }
+        }
+    </script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+        code, .font-mono { font-family: 'Fira Code', monospace; }
+        ::-webkit-scrollbar { width: 8px; height: 8px; }
+        ::-webkit-scrollbar-track { background: #0b0f19; }
+        ::-webkit-scrollbar-thumb { background: #1e293b; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: #334155; }
+    </style>
+</head>
+<body class="bg-darkBg text-slate-100 min-h-screen selection:bg-blue-500 selection:text-white">
+
+    <!-- Top Navigation / Header -->
+    <header class="sticky top-0 z-50 bg-darkBg/80 backdrop-blur-md border-b border-borderCol">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+            <div class="flex items-center space-x-3">
+                <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-blue-600 to-purple-600 flex items-center justify-center shadow-lg shadow-blue-500/20">
+                    <i class="fa-solid fa-graduation-cap text-white text-lg"></i>
+                </div>
+                <div>
+                    <h1 class="font-bold text-lg tracking-tight bg-gradient-to-r from-white via-slate-200 to-slate-400 bg-clip-text text-transparent">System Design & LLD</h1>
+                    <p class="text-xs text-slate-400">1-Hour Daily Master Roadmap</p>
+                </div>
+            </div>
+
+            <!-- Header Action Controls -->
+            <div class="flex items-center space-x-3">
+                <!-- Overall Progress Indicator -->
+                <div class="hidden md:flex items-center space-x-2 bg-cardBg border border-borderCol px-3 py-1.5 rounded-lg">
+                    <span class="text-xs text-slate-400 font-medium">Overall Progress:</span>
+                    <div class="w-24 bg-slate-800 rounded-full h-2 overflow-hidden">
+                        <div id="overall-progress-bar" class="bg-gradient-to-r from-blue-500 to-emerald-500 h-2 rounded-full transition-all duration-500" style="width: 0%"></div>
+                    </div>
+                    <span id="overall-progress-text" class="text-xs font-bold text-emerald-400">0%</span>
+                </div>
+
+                <!-- Timer Toggle Button -->
+                <button onclick="toggleTimerModal(true)" class="flex items-center space-x-2 bg-blue-600 hover:bg-blue-500 text-white px-3.5 py-2 rounded-lg font-medium text-sm transition shadow-lg shadow-blue-600/20">
+                    <i class="fa-solid fa-stopwatch"></i>
+                    <span class="hidden sm:inline">1-Hr Study Timer</span>
+                    <span id="header-timer-badge" class="bg-blue-800 text-xs px-1.5 py-0.5 rounded font-mono">60:00</span>
+                </button>
+
+                <!-- Share / GitHub Modal Button -->
+                <button onclick="toggleShareModal(true)" class="flex items-center space-x-2 bg-slate-800 hover:bg-slate-700 text-slate-200 border border-borderCol px-3.5 py-2 rounded-lg font-medium text-sm transition">
+                    <i class="fa-brands fa-github"></i>
+                    <span class="hidden sm:inline">Deploy & Share</span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content Container -->
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+
+        <!-- Hero Section / 1-Hour Breakdown Guide -->
+        <section class="mb-10 bg-gradient-to-br from-cardBg via-cardBg to-slate-900 border border-borderCol rounded-2xl p-6 sm:p-8 shadow-xl relative overflow-hidden">
+            <div class="absolute -right-10 -bottom-10 w-64 h-64 bg-blue-500/10 rounded-full blur-3xl pointer-events-none"></div>
+            <div class="absolute -left-10 -top-10 w-64 h-64 bg-purple-500/10 rounded-full blur-3xl pointer-events-none"></div>
+
+            <div class="relative z-10">
+                <div class="inline-flex items-center space-x-2 bg-blue-500/10 text-blue-400 border border-blue-500/20 px-3 py-1 rounded-full text-xs font-semibold mb-4">
+                    <i class="fa-solid fa-bolt"></i>
+                    <span>Structured 60-Minute Daily Routine</span>
+                </div>
+                <h2 class="text-2xl sm:text-3xl font-extrabold text-white tracking-tight mb-3">Master System Design & LLD in Just 1 Hour a Day</h2>
+                <p class="text-slate-300 text-sm sm:text-base max-w-3xl mb-6">
+                    Consistency beats intensity. Follow this battle-tested daily 60-minute time allocation to progress step-by-step through High-Level Design (HLD) and Low-Level Design (LLD).
+                </p>
+
+                <!-- 1 Hour Breakdown Grid -->
+                <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                    <div class="bg-darkBg/60 border border-borderCol/80 rounded-xl p-4 backdrop-blur">
+                        <div class="flex items-center justify-between mb-2">
+                            <span class="text-xs font-bold text-blue-400 uppercase tracking-wider">Phase 1</span>
+                            <span class="bg-blue-500/20 text-blue-300 text-xs px-2 py-0.5 rounded font-mono font-bold">10 mins</span>
+                        </div>
+                        <h3 class="font-semibold text-white text-sm mb-1">Core Concepts & Theory</h3>
+                        <p class="text-xs text-slate-400">Read through definitions, protocols, trade-offs, or design patterns for the day's topic.</p>
+                    </div>
+
+                    <div class="bg-darkBg/60 border border-borderCol/80 rounded-xl p-4 backdrop-blur">
+                        <div class="flex items-center justify-between mb-2">
+                            <span class="text-xs font-bold text-purple-400 uppercase tracking-wider">Phase 2</span>
+                            <span class="bg-purple-500/20 text-purple-300 text-xs px-2 py-0.5 rounded font-mono font-bold">30 mins</span>
+                        </div>
+                        <h3 class="font-semibold text-white text-sm mb-1">Deep Dive & Architecture</h3>
+                        <p class="text-xs text-slate-400">Examine diagrams, database schemas, API contracts, concurrency handling, or system components.</p>
+                    </div>
+
+                    <div class="bg-darkBg/60 border border-borderCol/80 rounded-xl p-4 backdrop-blur">
+                        <div class="flex items-center justify-between mb-2">
+                            <span class="text-xs font-bold text-emerald-400 uppercase tracking-wider">Phase 3</span>
+                            <span class="bg-emerald-500/20 text-emerald-300 text-xs px-2 py-0.5 rounded font-mono font-bold">20 mins</span>
+                        </div>
+                        <h3 class="font-semibold text-white text-sm mb-1">Revision & Problem Solving</h3>
+                        <p class="text-xs text-slate-400">Solve a mock practice problem, write code snippet, or review flashcards & check off items.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Navigation Tabs for HLD, LLD & Practice Trackers -->
+        <div class="flex flex-wrap items-center justify-between gap-4 mb-8 border-b border-borderCol pb-4">
+            <div class="flex space-x-2 bg-cardBg p-1.5 rounded-xl border border-borderCol">
+                <button onclick="switchTab('hld')" id="tab-btn-hld" class="px-5 py-2.5 rounded-lg text-sm font-semibold transition bg-blue-600 text-white shadow">
+                    <i class="fa-solid fa-network-wired mr-2"></i>HLD Roadmap
+                </button>
+                <button onclick="switchTab('lld')" id="tab-btn-lld" class="px-5 py-2.5 rounded-lg text-sm font-semibold transition text-slate-400 hover:text-white">
+                    <i class="fa-solid fa-cubes mr-2"></i>LLD Roadmap
+                </button>
+                <button onclick="switchTab('practice')" id="tab-btn-practice" class="px-5 py-2.5 rounded-lg text-sm font-semibold transition text-slate-400 hover:text-white">
+                    <i class="fa-solid fa-laptop-code mr-2"></i>Practice Tracker
+                </button>
+            </div>
+
+            <!-- Quick Filter & Actions -->
+            <div class="flex items-center space-x-3">
+                <button onclick="resetAllProgress()" class="text-xs text-slate-400 hover:text-red-400 transition flex items-center space-x-1 bg-cardBg border border-borderCol px-3 py-2 rounded-lg">
+                    <i class="fa-solid fa-rotate-right"></i>
+                    <span>Reset Progress</span>
+                </button>
+            </div>
+        </div>
+
+        <!-- TAB CONTENT: HLD -->
+        <div id="tab-content-hld" class="space-y-6">
+            <div class="flex items-center justify-between">
+                <div>
+                    <h3 class="text-xl font-bold text-white">High-Level Design (HLD) Curriculum</h3>
+                    <p class="text-slate-400 text-sm">Distributed systems, scalability, storage, caching, networking, security & trade-offs.</p>
+                </div>
+                <span id="hld-count" class="text-xs font-mono bg-blue-500/10 text-blue-400 border border-blue-500/20 px-3 py-1 rounded-lg">0 / 0 Completed</span>
+            </div>
+
+            <!-- HLD Steps Container -->
+            <div id="hld-steps-container" class="space-y-4">
+                <!-- Generated dynamically via JS -->
+            </div>
+        </div>
+
+        <!-- TAB CONTENT: LLD -->
+        <div id="tab-content-lld" class="space-y-6 hidden">
+            <div class="flex items-center justify-between">
+                <div>
+                    <h3 class="text-xl font-bold text-white">Low-Level Design (LLD) Curriculum</h3>
+                    <p class="text-slate-400 text-sm">Object-Oriented Programming, design patterns, concurrency, clean code & machine coding problems.</p>
+                </div>
+                <span id="lld-count" class="text-xs font-mono bg-purple-500/10 text-purple-400 border border-purple-500/20 px-3 py-1 rounded-lg">0 / 0 Completed</span>
+            </div>
+
+            <!-- LLD Steps Container -->
+            <div id="lld-steps-container" class="space-y-4">
+                <!-- Generated dynamically via JS -->
+            </div>
+        </div>
+
+        <!-- TAB CONTENT: Practice Trackers -->
+        <div id="tab-content-practice" class="space-y-10 hidden">
+            <!-- HLD Practice Systems -->
+            <div class="space-y-4">
+                <div class="flex items-center justify-between">
+                    <div>
+                        <h3 class="text-xl font-bold text-white">Top 10 HLD System Design Interview Problems</h3>
+                        <p class="text-slate-400 text-sm">Architect large-scale distributed applications from scratch.</p>
+                    </div>
+                    <span id="hld-practice-count" class="text-xs font-mono bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 px-3 py-1 rounded-lg">0 / 10 Mastered</span>
+                </div>
+                <div id="hld-practice-grid" class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <!-- Generated via JS -->
+                </div>
+            </div>
+
+            <!-- LLD Machine Coding Problems -->
+            <div class="space-y-4 pt-6 border-t border-borderCol">
+                <div class="flex items-center justify-between">
+                    <div>
+                        <h3 class="text-xl font-bold text-white">Top 10 LLD Machine Coding & Object-Oriented Problems</h3>
+                        <p class="text-slate-400 text-sm">Design modular, extensible classes and design patterns in code.</p>
+                    </div>
+                    <span id="lld-practice-count" class="text-xs font-mono bg-purple-500/10 text-purple-400 border border-purple-500/20 px-3 py-1 rounded-lg">0 / 10 Mastered</span>
+                </div>
+                <div id="lld-practice-grid" class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <!-- Generated via JS -->
+                </div>
+            </div>
+        </div>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="mt-20 border-t border-borderCol bg-cardBg/40 py-8 text-center text-xs text-slate-500">
+        <p>System Design & LLD Roadmap • Built for developers sharing knowledge with friends.</p>
+        <p class="mt-1">Deployable on GitHub Pages in 1 click.</p>
+    </footer>
+
+    <!-- 1-HOUR STUDY TIMER MODAL -->
+    <div id="timer-modal" class="fixed inset-0 z-50 bg-black/70 backdrop-blur-sm hidden flex items-center justify-center p-4">
+        <div class="bg-cardBg border border-borderCol rounded-2xl max-w-md w-full p-6 shadow-2xl relative">
+            <div class="flex items-center justify-between mb-6">
+                <div class="flex items-center space-x-2">
+                    <i class="fa-solid fa-stopwatch text-blue-500 text-lg"></i>
+                    <h3 class="text-lg font-bold text-white">1-Hour Focused Study Timer</h3>
+                </div>
+                <button onclick="toggleTimerModal(false)" class="text-slate-400 hover:text-white p-1">
+                    <i class="fa-solid fa-xmark text-lg"></i>
+                </button>
+            </div>
+
+            <!-- Timer Display -->
+            <div class="text-center py-6 bg-darkBg border border-borderCol rounded-xl mb-6 relative overflow-hidden">
+                <div id="timer-phase-badge" class="inline-block bg-blue-500/20 text-blue-400 text-xs font-semibold px-3 py-1 rounded-full mb-3">
+                    Phase 1: Core Concepts (10 mins)
+                </div>
+                <div id="timer-display" class="font-mono text-5xl sm:text-6xl font-extrabold text-white tracking-wider mb-2">
+                    60:00
+                </div>
+                <p id="timer-subtitle" class="text-xs text-slate-400">Focus on reading & understanding roadmap definitions</p>
+
+                <!-- Progress Ring or Bar -->
+                <div class="w-full bg-slate-800 h-1.5 absolute bottom-0 left-0">
+                    <div id="timer-progress-bar" class="bg-blue-500 h-1.5 transition-all duration-1000" style="width: 100%"></div>
+                </div>
+            </div>
+
+            <!-- Timer Controls -->
+            <div class="flex items-center justify-center space-x-3 mb-6">
+                <button id="timer-start-btn" onclick="startTimer()" class="flex-1 bg-blue-600 hover:bg-blue-500 text-white font-semibold py-3 rounded-xl transition flex items-center justify-center space-x-2 shadow-lg shadow-blue-600/20">
+                    <i class="fa-solid fa-play"></i>
+                    <span>Start Session</span>
+                </button>
+                <button onclick="pauseTimer()" class="bg-slate-800 hover:bg-slate-700 text-slate-200 border border-borderCol font-semibold px-4 py-3 rounded-xl transition">
+                    <i class="fa-solid fa-pause"></i>
+                </button>
+                <button onclick="resetTimer()" class="bg-slate-800 hover:bg-slate-700 text-slate-200 border border-borderCol font-semibold px-4 py-3 rounded-xl transition" title="Reset">
+                    <i class="fa-solid fa-rotate-left"></i>
+                </button>
+            </div>
+
+            <!-- Preset / Phase Switcher -->
+            <div class="grid grid-cols-3 gap-2">
+                <button onclick="setTimerPhase(10, 'Phase 1: Core Concepts (10 mins)', 'Focus on reading & understanding roadmap definitions')" class="bg-darkBg hover:bg-slate-800 border border-borderCol p-2.5 rounded-lg text-center transition">
+                    <span class="block text-xs font-bold text-blue-400">10m</span>
+                    <span class="text-[10px] text-slate-400">Concepts</span>
+                </button>
+                <button onclick="setTimerPhase(30, 'Phase 2: Deep Dive & Architecture (30 mins)', 'Examine schemas, diagrams, components & data flow')" class="bg-darkBg hover:bg-slate-800 border border-borderCol p-2.5 rounded-lg text-center transition">
+                    <span class="block text-xs font-bold text-purple-400">30m</span>
+                    <span class="text-[10px] text-slate-400">Deep Dive</span>
+                </button>
+                <button onclick="setTimerPhase(20, 'Phase 3: Revision & Practice (20 mins)', 'Review checklists, notes & solve practice problems')" class="bg-darkBg hover:bg-slate-800 border border-borderCol p-2.5 rounded-lg text-center transition">
+                    <span class="block text-xs font-bold text-emerald-400">20m</span>
+                    <span class="text-[10px] text-slate-400">Revision</span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- GITHUB DEPLOY & SHARE MODAL -->
+    <div id="share-modal" class="fixed inset-0 z-50 bg-black/70 backdrop-blur-sm hidden flex items-center justify-center p-4">
+        <div class="bg-cardBg border border-borderCol rounded-2xl max-w-lg w-full p-6 sm:p-8 shadow-2xl relative max-h-[90vh] overflow-y-auto">
+            <div class="flex items-center justify-between mb-6">
+                <div class="flex items-center space-x-2">
+                    <i class="fa-brands fa-github text-white text-xl"></i>
+                    <h3 class="text-lg font-bold text-white">Deploy & Share with Friends</h3>
+                </div>
+                <button onclick="toggleShareModal(false)" class="text-slate-400 hover:text-white p-1">
+                    <i class="fa-solid fa-xmark text-lg"></i>
+                </button>
+            </div>
+
+            <div class="space-y-4 text-sm text-slate-300">
+                <p>Want to share this exact interactive roadmap website with your friends? You can host it for free on <strong class="text-white">GitHub Pages</strong> in under 2 minutes!</p>
+                
+                <div class="bg-darkBg border border-borderCol p-4 rounded-xl space-y-3 font-mono text-xs">
+                    <div class="text-slate-400 font-sans font-bold text-xs uppercase tracking-wider mb-1">Step-by-Step GitHub Guide:</div>
+                    <p><span class="text-blue-400">1.</span> Create a new public repository on GitHub (e.g., <code class="text-emerald-400">system-design-roadmap</code>).</p>
+                    <p><span class="text-blue-400">2.</span> Save the code of this page into a file named <code class="text-emerald-400">index.html</code>.</p>
+                    <p><span class="text-blue-400">3.</span> Push <code class="text-emerald-400">index.html</code> to the <code class="text-emerald-400">main</code> branch of your repository.</p>
+                    <p><span class="text-blue-400">4.</span> Go to repository <strong>Settings</strong> &gt; <strong>Pages</strong>.</p>
+                    <p><span class="text-blue-400">5.</span> Under Build and deployment, set Branch to <code class="text-emerald-400">main</code> and folder to <code class="text-emerald-400">/ (root)</code>, then click Save!</p>
+                </div>
+
+                <div class="bg-blue-500/10 border border-blue-500/20 p-4 rounded-xl flex items-center justify-between">
+                    <div>
+                        <h4 class="font-semibold text-blue-400 text-xs mb-1">Export / Import Progress Backup</h4>
+                        <p class="text-xs text-slate-400">Export your completed checklist progress as JSON to share with study buddies.</p>
+                    </div>
+                    <div class="flex space-x-2">
+                        <button onclick="exportProgress()" class="bg-blue-600 hover:bg-blue-500 text-white px-3 py-1.5 rounded-lg font-medium text-xs transition">Export</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mt-6 pt-4 border-t border-borderCol flex justify-end">
+                <button onclick="toggleShareModal(false)" class="bg-slate-800 hover:bg-slate-700 text-white px-4 py-2 rounded-xl text-sm font-semibold transition">Got it!</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- APPLICATION LOGIC & DATA -->
+    <script>
+        // Data Structure for HLD Curriculum
+        const hldData = [
+            {
+                id: 'hld-1',
+                title: 'Step 1: Fundamentals',
+                topics: [
+                    { name: 'Serverless vs Serverful', notes: 'Serverless abstracts server management (AWS Lambda, Fargate) with pay-as-you-go and auto-scaling. Serverful gives full OS control, custom runtimes, and predictable costs for heavy persistent loads.' },
+                    { name: 'Horizontal vs Vertical Scaling', notes: 'Vertical scaling (Scale Up) upgrades CPU/RAM on a single machine (has hardware limits & SPOF). Horizontal scaling (Scale Out) adds more machines behind a load balancer for infinite scaling and high availability.' },
+                    { name: 'What are threads?', notes: 'Lightweight units of execution within a process sharing the same memory space. Essential for concurrent request handling in web servers.' },
+                    { name: 'What are pages?', notes: 'Fixed-size blocks of virtual memory managed by the OS paging mechanism. Crucial for understanding memory allocation and page faults.' },
+                    { name: 'How does the internet work?', notes: 'DNS resolution, TCP 3-way handshake, TLS handshake, HTTP request/response cycle, and packet routing via routers and BGP.' }
+                ]
+            },
+            {
+                id: 'hld-2',
+                title: 'Step 2: Databases',
+                topics: [
+                    { name: 'SQL vs NoSQL Dbs', notes: 'SQL (Relational, ACID, rigid schema, e.g., PostgreSQL, MySQL) vs NoSQL (Non-relational, flexible schema, high throughput, e.g., MongoDB, Cassandra).' },
+                    { name: 'In-memory DBs', notes: 'Stores data in RAM for microsecond latency (e.g., Redis, Memcached). Used for caching, leaderboards, and session stores.' },
+                    { name: 'Data Replication & Migration', notes: 'Leader-follower (Master-Slave) replication for read scaling and high availability. Synchronous vs asynchronous replication tradeoffs.' },
+                    { name: 'Data Partitioning', notes: 'Splitting large databases into smaller, manageable chunks across multiple database instances.' },
+                    { name: 'Sharding', notes: 'Horizontal partitioning where rows are distributed across different database shards using a shard key (range-based, hash-based, or directory-based).' }
+                ]
+            },
+            {
+                id: 'hld-3',
+                title: 'Step 3: Consistency vs Availability',
+                topics: [
+                    { name: 'Data Consistency & its levels', notes: 'Strong consistency (linearizability), eventual consistency, causal consistency, and read-your-own-writes.' },
+                    { name: 'Isolation & its levels', notes: 'ACID isolation levels: Read Uncommitted, Read Committed, Repeatable Read, and Serializable. Preventing dirty reads and phantom reads.' },
+                    { name: 'CAP Theorem', notes: 'In a distributed system, you can only pick two out of Consistency, Availability, and Partition Tolerance. Since network partitions are inevitable, systems choose between CP and AP.' }
+                ]
+            },
+            {
+                id: 'hld-4',
+                title: 'Step 4: Cache',
+                topics: [
+                    { name: 'What is Cache? (Redis, Memcached)', notes: 'In-memory data store reducing disk I/O and database load. Redis supports complex data structures; Memcached is simple multi-threaded key-value.' },
+                    { name: 'Write Policies', notes: 'Write-through (writes to cache and DB simultaneously), Write-back/behind (writes to cache first, async write to DB), and Write-around (writes directly to DB, bypasses cache).' },
+                    { name: 'Replacement Policies', notes: 'LRU (Least Recently Used), LFU (Least Frequently Used), FIFO, and Segmented LRU (SLRU) to prevent cache pollution.' },
+                    { name: 'Content Delivery Networks (CDNs)', notes: 'Distributed edge servers caching static assets (images, video, JS/CSS) geographically close to users.' }
+                ]
+            },
+            {
+                id: 'hld-5',
+                title: 'Step 5: Networking',
+                topics: [
+                    { name: 'TCP vs UDP', notes: 'TCP is connection-oriented, reliable, ordered, with flow control. UDP is connectionless, fast, unreliable, ideal for real-time streaming/gaming.' },
+                    { name: 'What is HTTP (1/2/3) & HTTPS', notes: 'HTTP/1.1 (head-of-line blocking), HTTP/2 (binary framing, multiplexing, server push), HTTP/3 (runs on QUIC/UDP for zero-RTT handshakes), HTTPS (HTTP over TLS encryption).' },
+                    { name: 'Web Sockets', notes: 'Full-duplex persistent TCP connection over a single socket for real-time bidirectional communication (chat apps, stock tickers).' },
+                    { name: 'WebRTC & Video Streaming', notes: 'Peer-to-peer real-time communication for video/audio streaming and WebRTC data channels.' }
+                ]
+            },
+            {
+                id: 'hld-6',
+                title: 'Step 6: Load Balancers',
+                topics: [
+                    { name: 'Load Balancing Algorithms', notes: 'Stateless (Round Robin, Weighted Round Robin, IP Hash) and Stateful (Least Connections, Least Response Time, Sticky Sessions).' },
+                    { name: 'Consistent Hashing', notes: 'Distributed hash ring algorithm minimizing key redistribution when nodes (servers or caches) are added or removed.' },
+                    { name: 'Proxy & Reverse Proxy', notes: 'Forward proxy acts on behalf of clients (privacy, filtering). Reverse proxy acts on behalf of servers (load balancing, SSL termination, caching, security e.g., Nginx, Envoy).' },
+                    { name: 'Rate Limiting', notes: 'Algorithms to protect APIs: Token Bucket, Leaky Bucket, Fixed Window Counter, Sliding Window Log, and Sliding Window Counter.' }
+                ]
+            },
+            {
+                id: 'hld-8',
+                title: 'Step 8: Monoliths vs Microservices',
+                topics: [
+                    { name: 'Why Microservices?', notes: 'Decoupled services, independent deployments, technology diversity, team autonomy, and targeted scalability.' },
+                    { name: 'Concept of Single Point of Failure (SPOF)', notes: 'Identifying components whose failure causes the entire system to crash. Mitigation via redundancy and fault tolerance.' },
+                    { name: 'Avoiding Cascading Failures', notes: 'Using circuit breakers (e.g., Resilience4j), timeouts, bulkheads, and rate limiters to prevent failure propagation across services.' },
+                    { name: 'Containerization (Docker)', notes: 'Packaging code, runtime, system tools, and libraries into isolated containers for consistency across dev, test, and production.' },
+                    { name: 'Migrating to Microservices', notes: 'Strangler Fig pattern: incrementally replacing functionality of a monolith with microservices over time.' }
+                ]
+            },
+            {
+                id: 'hld-9',
+                title: 'Step 9: Monitoring & Logging',
+                topics: [
+                    { name: 'Logging events & monitoring metrics', notes: 'Centralized logging (ELK stack, Datadog), structured logs, metrics (CPU, memory, latency percentiles p99), and distributed tracing (Jaeger, Zipkin).' },
+                    { name: 'Anomaly Detection', notes: 'Using statistical models or machine learning to detect unusual spikes in error rates, latency, or traffic patterns.' }
+                ]
+            },
+            {
+                id: 'hld-10',
+                title: 'Step 10: Security',
+                topics: [
+                    { name: 'Tokens for Auth (JWT, OAuth2)', notes: 'Stateless JSON Web Tokens signed cryptographically. OAuth2 authorization framework for delegated access.' },
+                    { name: 'SSO & OAuth', notes: 'Single Sign-On (SAML, OpenID Connect) enabling users to log in once to access multiple applications.' },
+                    { name: 'Access Control Lists (ACL) & Rule Engines', notes: 'Role-Based Access Control (RBAC) and Attribute-Based Access Control (ABAC) for fine-grained authorization.' },
+                    { name: 'Encryption', notes: 'Encryption at rest (AES-256) and encryption in transit (TLS 1.3), public/private key cryptography.' }
+                ]
+            },
+            {
+                id: 'hld-11',
+                title: 'Step 11: System Design Tradeoffs',
+                topics: [
+                    { name: 'Push vs Pull Architecture', notes: 'Push (write fan-out, fast read, heavy write load for celebrity feeds) vs Pull (read fan-out, fast write, heavy read computation).' },
+                    { name: 'Consistency vs Availability', notes: 'Choosing CP vs AP systems based on business requirements (financial ledger vs social media feed).' },
+                    { name: 'SQL vs NoSQL Dbs', notes: 'Normalized structured relations vs flexible unbounded document/key-value access.' },
+                    { name: 'Memory vs Latency', notes: 'Caching aggressively to reduce database latency at the cost of high RAM usage and cache invalidation complexity.' },
+                    { name: 'Throughput vs Latency', notes: 'Batching requests increases overall throughput but increases individual request latency.' },
+                    { name: 'Accuracy vs Latency', notes: 'Approximate algorithms (HyperLogLog, Bloom filters) provide ultra-fast results with minimal memory at the cost of slight inaccuracy.' }
+                ]
+            }
+        ];
+
+        // Data Structure for LLD Curriculum
+        const lldData = [
+            {
+                id: 'lld-1',
+                title: 'Step 1: Object Oriented Programming',
+                topics: [
+                    { name: 'Encapsulation', notes: 'Bundling data and methods that operate on that data within a single unit (class) and restricting direct access (private/protected fields).' },
+                    { name: 'Abstraction', notes: 'Hiding complex implementation details and exposing only essential features via abstract classes and interfaces.' },
+                    { name: 'Inheritance', notes: 'Mechanism where a class inherits properties and behaviors from another class, promoting code reuse.' },
+                    { name: 'Polymorphism', notes: 'Ability to present the same interface for different underlying data types (method overloading & overriding).' },
+                    { name: 'SOLID Principles', notes: 'Single Responsibility, Open/Closed, Liskov Substitution, Interface Segregation, and Dependency Inversion.' }
+                ]
+            },
+            {
+                id: 'lld-2',
+                title: 'Step 2: Design Patterns',
+                topics: [
+                    { name: 'Creational Patterns', notes: 'Singleton, Factory Method, Abstract Factory, Builder, and Prototype (managing object creation).' },
+                    { name: 'Structural Patterns', notes: 'Adapter, Bridge, Composite, Decorator, Facade, Flyweight, and Proxy (composition of classes and objects).' },
+                    { name: 'Behavioral Patterns', notes: 'Strategy, Observer, Command, State, Template Method, Iterator, Mediator, and Chain of Responsibility.' }
+                ]
+            },
+            {
+                id: 'lld-3',
+                title: 'Step 3: Concurrency & Thread Safety',
+                topics: [
+                    { name: 'Thread-safe Injection', notes: 'Ensuring dependency injection containers provide singleton or scoped dependencies safely across threads.' },
+                    { name: 'Locking Mechanisms', notes: 'Mutexes, Reentrant locks, read-write locks, spinlocks, and optimistic concurrency control (CAS).' },
+                    { name: 'Producer-Consumer Pattern', notes: 'Decoupling producers and consumers using thread-safe blocking queues and condition variables.' },
+                    { name: 'Race Conditions & Synchronization', notes: 'Avoiding data corruption in shared mutable state using atomic variables and synchronized blocks.' }
+                ]
+            },
+            {
+                id: 'lld-4',
+                title: 'Step 4: UML Diagrams',
+                topics: [
+                    { name: 'Class Diagrams', notes: 'Visualizing classes, attributes, methods, and associations (inheritance, aggregation, composition).' },
+                    { name: 'Sequence Diagrams', notes: 'Showing object interactions arranged in time sequence for API workflows and method calls.' },
+                    { name: 'Activity & State Diagrams', notes: 'Workflow modeling and object state transitions.' }
+                ]
+            },
+            {
+                id: 'lld-5',
+                title: 'Step 5: APIs & Clean Code',
+                topics: [
+                    { name: 'API Design & Versioning', notes: 'RESTful best practices, URI naming conventions, HTTP status codes, pagination, and API versioning strategies (/api/v1/).' },
+                    { name: 'Request/Response Object Modeling', notes: 'DTOs (Data Transfer Objects), validation annotations, and error response formatting.' },
+                    { name: 'Clean Code Principles (DRY, SRP)', notes: 'Don\'t Repeat Yourself, Single Responsibility Principle, meaningful naming, small functions, and avoiding God classes.' }
+                ]
+            }
+        ];
+
+        // Practice Problems Data
+        const hldPracticeProblems = [
+            { id: 'hp-1', name: '1. YouTube', desc: 'Video upload pipeline, chunking, transcoding, adaptive bitrate streaming, CDN caching.' },
+            { id: 'hp-2', name: '2. Twitter', desc: 'Timeline generation, fan-out on write vs read, tweet search, caching with Redis.' },
+            { id: 'hp-3', name: '3. WhatsApp', desc: 'Real-time bidirectional chat, WebSockets, offline message queue, message delivery acknowledgments.' },
+            { id: 'hp-4', name: '4. Uber', desc: 'Geo-spatial indexing (H3, Geohash), real-time driver matching, trip state machine.' },
+            { id: 'hp-5', name: '5. Amazon', desc: 'E-commerce catalog, shopping cart, distributed inventory management, flash sale flash-traffic handling.' },
+            { id: 'hp-6', name: '6. Dropbox / Google Drive', desc: 'File chunking, deduplication (content hashing), block-level sync, resumable uploads.' },
+            { id: 'hp-7', name: '7. Netflix', desc: 'Global video streaming architecture, CDN multi-CDN strategy, recommendation engine data pipeline.' },
+            { id: 'hp-8', name: '8. Instagram', desc: 'Photo storage (S3/CDN), news feed ranking, follower graph sharding.' },
+            { id: 'hp-9', name: '9. Zoom', desc: 'SFU (Selective Forwarding Unit) vs MCU architecture for real-time multi-party video conferencing.' },
+            { id: 'hp-10', name: '10. Booking.com / Airbnb', desc: 'Inventory concurrency locking, geo-search, recommendation filtering, booking double-booking prevention.' }
+        ];
+
+        const lldPracticeProblems = [
+            { id: 'lp-1', name: '1. Tic-Tac-Toe or Chess Game', desc: 'Board representation, piece movement validation, rule engine, win/draw detection.' },
+            { id: 'lp-2', name: '2. Splitwise App', desc: 'Expense sharing, simplify debts graph algorithm, user balances, group settlements.' },
+            { id: 'lp-3', name: '3. Parking Lot System', desc: 'Multi-level parking, vehicle types, slot allocation strategy, pricing calculator.' },
+            { id: 'lp-4', name: '4. Elevator System', desc: 'Dispatcher algorithm, multi-car coordination, request queue management, direction optimization.' },
+            { id: 'lp-5', name: '5. Notification System', desc: 'Multi-channel dispatchers (SMS, Email, Push), rate limiting, retry queue, template rendering.' },
+            { id: 'lp-6', name: '6. Food Delivery App (Swiggy/Zomato)', desc: 'Restaurant menu catalog, cart, order placement, restaurant partner assignment, delivery tracking.' },
+            { id: 'lp-7', name: '7. Movie Ticket Booking System (BookMyShow)', desc: 'Seat locking mechanism with timeout, concurrency seat reservation, payment gateway integration.' },
+            { id: 'lp-8', name: '8. URL Shortener', desc: 'Base62 encoding, custom aliases, collision handling, redirection caching.' },
+            { id: 'lp-9', name: '9. Logging Framework', desc: 'Appenders, log levels (INFO, ERROR, DEBUG), asynchronous log queue, formatters.' },
+            { id: 'lp-10', name: '10. Rate Limiter', desc: 'Token bucket and sliding window algorithms, thread-safe rate tracking per client ID.' }
+        ];
+
+        // LocalStorage State Management
+        let userProgress = JSON.parse(localStorage.getItem('sys_design_progress') || '{}');
+        let practiceStatus = JSON.parse(localStorage.getItem('sys_design_practice') || '{}');
+
+        // Timer State
+        let timerInterval = null;
+        let timerSecondsRemaining = 60 * 60; // 60 minutes
+        let timerTotalSeconds = 60 * 60;
+        let isTimerRunning = false;
+        let currentTimerPhaseTitle = 'Phase 1: Core Concepts (10 mins)';
+
+        // Initialize App on Load
+        window.addEventListener('DOMContentLoaded', () => {
+            renderHLD();
+            renderLLD();
+            renderPractice();
+            updateAllProgressStats();
+        });
+
+        // Tab Switching
+        function switchTab(tabKey) {
+            ['hld', 'lld', 'practice'].forEach(t => {
+                document.getElementById(`tab-content-${t}`).classList.add('hidden');
+                document.getElementById(`tab-btn-${t}`).className = 'px-5 py-2.5 rounded-lg text-sm font-semibold transition text-slate-400 hover:text-white';
+            });
+            document.getElementById(`tab-content-${tabKey}`).classList.remove('hidden');
+            document.getElementById(`tab-btn-${tabKey}`).className = 'px-5 py-2.5 rounded-lg text-sm font-semibold transition bg-blue-600 text-white shadow';
+        }
+
+        // Render HLD Roadmap
+        function renderHLD() {
+            const container = document.getElementById('hld-steps-container');
+            container.innerHTML = hldData.map(step => {
+                const stepTopicsCount = step.topics.length;
+                const completedCount = step.topics.filter(tp => userProgress[getTopicKey(step.id, tp.name)]).length;
+                const isStepComplete = completedCount === stepTopicsCount;
+
+                return `
+                    <div class="bg-cardBg border ${isStepComplete ? 'border-emerald-500/30' : 'border-borderCol'} rounded-2xl p-5 shadow-lg transition">
+                        <div class="flex items-center justify-between cursor-pointer" onclick="toggleStepCollapse('${step.id}')">
+                            <div class="flex items-center space-x-3">
+                                <div class="w-8 h-8 rounded-lg ${isStepComplete ? 'bg-emerald-500/20 text-emerald-400' : 'bg-blue-500/20 text-blue-400'} flex items-center justify-center font-bold text-sm">
+                                    ${isStepComplete ? '<i class="fa-solid fa-check"></i>' : '<i class="fa-solid fa-layer-group"></i>'}
+                                </div>
+                                <div>
+                                    <h4 class="font-bold text-white text-base">${step.title}</h4>
+                                    <p class="text-xs text-slate-400">${completedCount} / ${stepTopicsCount} topics mastered</p>
+                                </div>
+                            </div>
+                            <div class="flex items-center space-x-3">
+                                <span class="text-xs font-mono bg-slate-800 text-slate-300 px-2.5 py-1 rounded-lg">${Math.round((completedCount/stepTopicsCount)*100)}%</span>
+                                <i id="icon-${step.id}" class="fa-solid fa-chevron-down text-slate-400 text-sm transition-transform duration-300"></i>
+                            </div>
+                        </div>
+
+                        <!-- Topics List -->
+                        <div id="body-${step.id}" class="mt-4 pt-4 border-t border-borderCol/60 space-y-3">
+                            ${step.topics.map(topic => {
+                                const key = getTopicKey(step.id, topic.name);
+                                const isChecked = !!userProgress[key];
+                                return `
+                                    <div class="bg-darkBg/50 border border-borderCol/60 rounded-xl p-3.5 hover:border-slate-700 transition">
+                                        <div class="flex items-start justify-between gap-3">
+                                            <label class="flex items-start space-x-3 cursor-pointer flex-1">
+                                                <input type="checkbox" ${isChecked ? 'checked' : ''} onchange="toggleTopic('${key}')" class="mt-1 w-4 h-4 rounded bg-slate-900 border-slate-700 text-blue-600 focus:ring-blue-500">
+                                                <div>
+                                                    <span class="font-semibold text-sm ${isChecked ? 'line-through text-slate-500' : 'text-slate-200'}">${topic.name}</span>
+                                                    <p class="text-xs text-slate-400 mt-1 leading-relaxed">${topic.notes}</p>
+                                                </div>
+                                            </label>
+                                        </div>
+                                    </div>
+                                `;
+                            }).join('')}
+                        </div>
+                    </div>
+                `;
+            }).join('');
+        }
+
+        // Render LLD Roadmap
+        function renderLLD() {
+            const container = document.getElementById('lld-steps-container');
+            container.innerHTML = lldData.map(step => {
+                const stepTopicsCount = step.topics.length;
+                const completedCount = step.topics.filter(tp => userProgress[getTopicKey(step.id, tp.name)]).length;
+                const isStepComplete = completedCount === stepTopicsCount;
+
+                return `
+                    <div class="bg-cardBg border ${isStepComplete ? 'border-emerald-500/30' : 'border-borderCol'} rounded-2xl p-5 shadow-lg transition">
+                        <div class="flex items-center justify-between cursor-pointer" onclick="toggleStepCollapse('${step.id}')">
+                            <div class="flex items-center space-x-3">
+                                <div class="w-8 h-8 rounded-lg ${isStepComplete ? 'bg-emerald-500/20 text-emerald-400' : 'bg-purple-500/20 text-purple-400'} flex items-center justify-center font-bold text-sm">
+                                    ${isStepComplete ? '<i class="fa-solid fa-check"></i>' : '<i class="fa-solid fa-cube"></i>'}
+                                </div>
+                                <div>
+                                    <h4 class="font-bold text-white text-base">${step.title}</h4>
+                                    <p class="text-xs text-slate-400">${completedCount} / ${stepTopicsCount} topics mastered</p>
+                                </div>
+                            </div>
+                            <div class="flex items-center space-x-3">
+                                <span class="text-xs font-mono bg-slate-800 text-slate-300 px-2.5 py-1 rounded-lg">${Math.round((completedCount/stepTopicsCount)*100)}%</span>
+                                <i id="icon-${step.id}" class="fa-solid fa-chevron-down text-slate-400 text-sm transition-transform duration-300"></i>
+                            </div>
+                        </div>
+
+                        <!-- Topics List -->
+                        <div id="body-${step.id}" class="mt-4 pt-4 border-t border-borderCol/60 space-y-3">
+                            ${step.topics.map(topic => {
+                                const key = getTopicKey(step.id, topic.name);
+                                const isChecked = !!userProgress[key];
+                                return `
+                                    <div class="bg-darkBg/50 border border-borderCol/60 rounded-xl p-3.5 hover:border-slate-700 transition">
+                                        <div class="flex items-start justify-between gap-3">
+                                            <label class="flex items-start space-x-3 cursor-pointer flex-1">
+                                                <input type="checkbox" ${isChecked ? 'checked' : ''} onchange="toggleTopic('${key}')" class="mt-1 w-4 h-4 rounded bg-slate-900 border-slate-700 text-purple-600 focus:ring-purple-500">
+                                                <div>
+                                                    <span class="font-semibold text-sm ${isChecked ? 'line-through text-slate-500' : 'text-slate-200'}">${topic.name}</span>
+                                                    <p class="text-xs text-slate-400 mt-1 leading-relaxed">${topic.notes}</p>
+                                                </div>
+                                            </label>
+                                        </div>
+                                    </div>
+                                `;
+                            }).join('')}
+                        </div>
+                    </div>
+                `;
+            }).join('');
+        }
+
+        // Render Practice Trackers
+        function renderPractice() {
+            // HLD Practice
+            const hldGrid = document.getElementById('hld-practice-grid');
+            hldGrid.innerHTML = hldPracticeProblems.map(prob => {
+                const status = practiceStatus[prob.id] || 'todo';
+                return `
+                    <div class="bg-cardBg border border-borderCol rounded-xl p-4 flex flex-col justify-between">
+                        <div>
+                            <div class="flex items-center justify-between mb-2">
+                                <h4 class="font-bold text-white text-sm">${prob.name}</h4>
+                                <select onchange="updatePracticeStatus('${prob.id}', this.value)" class="bg-darkBg border border-borderCol text-xs rounded-lg px-2 py-1 font-medium ${status === 'mastered' ? 'text-emerald-400 border-emerald-500/30' : status === 'progress' ? 'text-blue-400 border-blue-500/30' : 'text-slate-400'}">
+                                    <option value="todo" ${status==='todo'?'selected':''}>To-Do</option>
+                                    <option value="progress" ${status==='progress'?'selected':''}>In Progress</option>
+                                    <option value="mastered" ${status==='mastered'?'selected':''}>Mastered</option>
+                                </select>
+                            </div>
+                            <p class="text-xs text-slate-400 leading-relaxed">${prob.desc}</p>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+
+            // LLD Practice
+            const lldGrid = document.getElementById('lld-practice-grid');
+            lldGrid.innerHTML = lldPracticeProblems.map(prob => {
+                const status = practiceStatus[prob.id] || 'todo';
+                return `
+                    <div class="bg-cardBg border border-borderCol rounded-xl p-4 flex flex-col justify-between">
+                        <div>
+                            <div class="flex items-center justify-between mb-2">
+                                <h4 class="font-bold text-white text-sm">${prob.name}</h4>
+                                <select onchange="updatePracticeStatus('${prob.id}', this.value)" class="bg-darkBg border border-borderCol text-xs rounded-lg px-2 py-1 font-medium ${status === 'mastered' ? 'text-emerald-400 border-emerald-500/30' : status === 'progress' ? 'text-blue-400 border-blue-500/30' : 'text-slate-400'}">
+                                    <option value="todo" ${status==='todo'?'selected':''}>To-Do</option>
+                                    <option value="progress" ${status==='progress'?'selected':''}>In Progress</option>
+                                    <option value="mastered" ${status==='mastered'?'selected':''}>Mastered</option>
+                                </select>
+                            </div>
+                            <p class="text-xs text-slate-400 leading-relaxed">${prob.desc}</p>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+        }
+
+        function getTopicKey(stepId, topicName) {
+            return `${stepId}___${topicName.replace(/[^a-zA-Z0-9]/g, '_')}`;
+        }
+
+        function toggleTopic(key) {
+            userProgress[key] = !userProgress[key];
+            localStorage.setItem('sys_design_progress', JSON.stringify(userProgress));
+            renderHLD();
+            renderLLD();
+            updateAllProgressStats();
+        }
+
+        function updatePracticeStatus(id, status) {
+            practiceStatus[id] = status;
+            localStorage.setItem('sys_design_practice', JSON.stringify(practiceStatus));
+            updateAllProgressStats();
+        }
+
+        function toggleStepCollapse(stepId) {
+            const body = document.getElementById(`body-${stepId}`);
+            const icon = document.getElementById(`icon-${stepId}`);
+            body.classList.toggle('hidden');
+            icon.classList.toggle('rotate-180');
+        }
+
+        function updateAllProgressStats() {
+            // HLD stats
+            let hldTotal = 0, hldDone = 0;
+            hldData.forEach(step => {
+                step.topics.forEach(tp => {
+                    hldTotal++;
+                    if (userProgress[getTopicKey(step.id, tp.name)]) hldDone++;
+                });
+            });
+            document.getElementById('hld-count').innerText = `${hldDone} / ${hldTotal} Completed`;
+
+            // LLD stats
+            let lldTotal = 0, lldDone = 0;
+            lldData.forEach(step => {
+                step.topics.forEach(tp => {
+                    lldTotal++;
+                    if (userProgress[getTopicKey(step.id, tp.name)]) lldDone++;
+                });
+            });
+            document.getElementById('lld-count').innerText = `${lldDone} / ${lldTotal} Completed`;
+
+            // Practice stats
+            let hldMastered = hldPracticeProblems.filter(p => practiceStatus[p.id] === 'mastered').length;
+            let lldMastered = lldPracticeProblems.filter(p => practiceStatus[p.id] === 'mastered').length;
+            document.getElementById('hld-practice-count').innerText = `${hldMastered} / 10 Mastered`;
+            document.getElementById('lld-practice-count').innerText = `${lldMastered} / 10 Mastered`;
+
+            // Overall percentage
+            const grandTotal = hldTotal + lldTotal + 20;
+            const grandDone = hldDone + lldDone + hldMastered + lldMastered;
+            const overallPct = Math.round((grandDone / grandTotal) * 100);
+
+            document.getElementById('overall-progress-bar').style.width = `${overallPct}%`;
+            document.getElementById('overall-progress-text').innerText = `${overallPct}%`;
+        }
+
+        function resetAllProgress() {
+            if (confirm('Are you sure you want to reset all checklist progress?')) {
+                userProgress = {};
+                practiceStatus = {};
+                localStorage.removeItem('sys_design_progress');
+                localStorage.removeItem('sys_design_practice');
+                renderHLD();
+                renderLLD();
+                renderPractice();
+                updateAllProgressStats();
+            }
+        }
+
+        // Timer Functions
+        function toggleTimerModal(show) {
+            const modal = document.getElementById('timer-modal');
+            if (show) modal.classList.remove('hidden');
+            else modal.classList.add('hidden');
+        }
+
+        function setTimerPhase(minutes, title, subtitle) {
+            pauseTimer();
+            timerTotalSeconds = minutes * 60;
+            timerSecondsRemaining = timerTotalSeconds;
+            currentTimerPhaseTitle = title;
+            document.getElementById('timer-phase-badge').innerText = title;
+            document.getElementById('timer-subtitle').innerText = subtitle;
+            updateTimerDisplay();
+        }
+
+        function startTimer() {
+            if (isTimerRunning) return;
+            isTimerRunning = true;
+            document.getElementById('timer-start-btn').innerHTML = '<i class="fa-solid fa-spinner animate-spin"></i><span>Running...</span>';
+            
+            timerInterval = setInterval(() => {
+                if (timerSecondsRemaining > 0) {
+                    timerSecondsRemaining--;
+                    updateTimerDisplay();
+                } else {
+                    pauseTimer();
+                    alert('Session complete! Time to switch study phases.');
+                }
+            }, 1000);
+        }
+
+        function pauseTimer() {
+            isTimerRunning = false;
+            clearInterval(timerInterval);
+            document.getElementById('timer-start-btn').innerHTML = '<i class="fa-solid fa-play"></i><span>Resume Session</span>';
+        }
+
+        function resetTimer() {
+            pauseTimer();
+            timerSecondsRemaining = timerTotalSeconds;
+            updateTimerDisplay();
+        }
+
+        function updateTimerDisplay() {
+            const mins = Math.floor(timerSecondsRemaining / 60);
+            const secs = timerSecondsRemaining % 60;
+            const formatted = `${String(mins).padStart(2, '0')}:${String(secs).padStart(2, '0')}`;
+            document.getElementById('timer-display').innerText = formatted;
+            document.getElementById('header-timer-badge').innerText = formatted;
+
+            const pct = (timerSecondsRemaining / timerTotalSeconds) * 100;
+            document.getElementById('timer-progress-bar').style.width = `${pct}%`;
+        }
+
+        // Share & Export Functions
+        function toggleShareModal(show) {
+            const modal = document.getElementById('share-modal');
+            if (show) modal.classList.remove('hidden');
+            else modal.classList.add('hidden');
+        }
+
+        function exportProgress() {
+            const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify({ userProgress, practiceStatus }));
+            const downloadAnchor = document.createElement('a');
+            downloadAnchor.setAttribute("href", dataStr);
+            downloadAnchor.setAttribute("download", "system_design_roadmap_progress.json");
+            document.body.appendChild(downloadAnchor);
+            downloadAnchor.click();
+            downloadAnchor.remove();
+        }
+    </script>
+</body>
+</html>
